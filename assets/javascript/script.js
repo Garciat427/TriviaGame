@@ -5,7 +5,7 @@ $(document).ready(function() {
         //Variable Properties
         topic: null, //Topic Property of GameObj
         loadedArr : null, //Property of game array to be loaded
-        loadedWord :null, //Property of loaded Word of current game
+        loadedQuestion :null, //Property of loaded Word of current game
         loadedGuess :[], //Array to store current gameword state
         readyState : false, //Boolean to prevent false starts without a topic
         ltrRemaining: null, //Stores num of letters remaining to guess
@@ -13,11 +13,82 @@ $(document).ready(function() {
         chances:null, //Stores num of chances left
 
         //GameArrays
-        canCities : ["Toronto", "Vancouver", "Montreal", "Ottawa", "Calgary", "Edmonton", "Winnipeg", "Victoria", "Quebec-City"],
+
+        topic1 : [
+            q1 = {
+                Question : "t1Question1", corrAns: "t1Ans1",
+                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+            },
+            q2 = {
+                Question : "t1Question2", corrAns: "t1Ans2",
+                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+            },
+            q3 = {
+                Question : "t1Question3", corrAns: "t1Ans3",
+                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+            },
+            q4 = {
+                Question : "t1Question4", corrAns: "t1Ans2",
+                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+            },
+            q5 = {
+                Question : "t1Question5", corrAns: "t1Ans4",
+                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+            }
+        ],
+
+        topic2 : [
+            q1 = {
+                Question : "t2Question1", corrAns: "t2Ans1",
+                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+            },
+            q2 = {
+                Question : "t2Question2", corrAns: "t2Ans2",
+                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+            },
+            q3 = {
+                Question : "t2Question3", corrAns: "t2Ans3",
+                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+            },
+            q4 = {
+                Question : "t2Question4", corrAns: "t2Ans2",
+                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+            },
+            q5 = {
+                Question : "t2Question5", corrAns: "t2Ans4",
+                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+            }
+        ],
+
+        topic3 : [
+            q1 = {
+                Question : "t3Question1", corrAns: "t3Ans1",
+                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+            },
+            q2 = {
+                Question : "t3Question1", corrAns: "t3Ans1",
+                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+            },
+            q3 = {
+                Question : "t3Question1", corrAns: "t3Ans1",
+                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+            },
+            q4 = {
+                Question : "t3Question1", corrAns: "t3Ans1",
+                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+            },
+            q5 = {
+                Question : "t3Question1", corrAns: "t3Ans1",
+                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+            }
+        ],
+
+
+        canCities : ["Toronto","Vancouver", "Montreal", "Ottawa", "Calgary", "Edmonton", "Winnipeg", "Victoria", "Quebec-City"],
         autoManu : ["Toyota", "Volkswagen", "Hyundai", "General-Motors", "Ford", "Nissan", "Honda", "Subaru", "Tesla", "Mercedes-Benz", "Lamborghini", "Land-Rover", "Audi", "BMW", "Chevrolet", "Lexus", "Kia", "Porsche"],
         schools : ["University-of-Toronto", "University-of-Waterloo", "Macmaster-University", "Queens-University"],
 
-        letters : ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+        letters : ["A", "B", "C", "D"],
 
         //Functions
         startLetter: function(){ //Dynamically Creates Buttons 
@@ -32,6 +103,7 @@ $(document).ready(function() {
         },
 
         randTopic: function(){ //Function used to generate random game topic
+            console.log(this.topic1[0].Question);
             var randNum = Math.floor((Math.random() * 3) + 1) //Gen rand num between 1-3 (topic 1-3)
             if (this.topic === randNum){ //If random topic is the same as previous topic
                 this.randTopic(); //Recursive Function Call to prevent duplicate topics
@@ -45,18 +117,18 @@ $(document).ready(function() {
             this.topic = sel;
             switch (this.topic){
                 case (1): //Canadian Cities
-                $(".topicSelected").text("Canadian Cities"); //Displays Current Topic : Canadian Cities
-                this.loadedArr = this.canCities;  //Loads Current Topic array
+                $(".topicSelected").text("topic1"); //Displays Current Topic : Canadian Cities
+                this.loadedArr = this.topic1;  //Loads Current Topic array
                 break;   
 
                 case (2): //Auto Makers
-                $(".topicSelected").text("Auto Manufacturer"); //Displays Current Topic : Auto Manu
-                this.loadedArr = this.autoManu; //Loads Current Topic array
+                $(".topicSelected").text("topic2"); //Displays Current Topic : Auto Manu
+                this.loadedArr = this.topic2; //Loads Current Topic array
                 break;
 
                 case (3): //Schools
-                $(".topicSelected").text("Schools"); //Displays Current Topic : Schools
-                this.loadedArr = this.schools; //Loads Current Topic array
+                $(".topicSelected").text("topic3"); //Displays Current Topic : Schools
+                this.loadedArr = this.topic3; //Loads Current Topic array
                 break;
             };
             //Changes Button Color
@@ -70,7 +142,7 @@ $(document).ready(function() {
             //Show game card and remove topic selector
             $("#gameCard").removeClass("invisible");
             $("#topicSel").empty();
-            this.selWord();
+            this.selQuestion();
             this.ltrRemaining = this.loadedWord.length
             this.incLetters = 0;
             this.chances = 7;
@@ -86,9 +158,9 @@ $(document).ready(function() {
             this.updateGameScreen();
         },
 
-        selWord: function () { //Function used to select random word from topic array
+        selQuestion: function () { //Function used to select random word from topic array
             var randArrSel = Math.floor(Math.random() * this.loadedArr.length)
-            this.loadedWord = this.loadedArr[randArrSel].toUpperCase();
+            this.loadedQuestion = this.loadedArr[randArrSel];
         },
 
         onClickLetter: function(btnClicked){ //Function performed on every letter button press
