@@ -6,12 +6,7 @@ $(document).ready(function() {
         topic: null, //Topic Property of GameObj
         loadedArr : null, //Property of game array to be loaded
         loadedQuestion :null, //Property of loaded Word of current game
-        loadedGuess :[], //Array to store current gameword state
         readyState : false, //Boolean to prevent false starts without a topic
-        ltrRemaining: null, //Stores num of letters remaining to guess
-        incLetters: null, //Stores num of incorrect letters
-        chances:null, //Stores num of chances left
-
         //GameArrays
 
         topic1 : [
@@ -142,25 +137,26 @@ $(document).ready(function() {
             //Show game card and remove topic selector
             $("#gameCard").removeClass("invisible");
             $("#topicSel").empty();
+            
             this.selQuestion();
-            this.ltrRemaining = this.loadedWord.length
             this.incLetters = 0;
-            this.chances = 7;
-            for (var i = 0; i < this.loadedWord.length; i++){
-                if (this.loadedWord[i] === "-"){
-                    this.loadedGuess.push ('-');
-                    this.ltrRemaining--;         
-                }
-                else{
-                    this.loadedGuess.push ('☐');
-                }
-            }
             this.updateGameScreen();
         },
 
         selQuestion: function () { //Function used to select random word from topic array
-            var randArrSel = Math.floor(Math.random() * this.loadedArr.length)
-            this.loadedQuestion = this.loadedArr[randArrSel];
+           /*  var randArrSel = Math.floor(Math.random() * this.loadedArr.length)
+            this.loadedQuestion = this.loadedArr[randArrSel]; */
+            var questionNum = 0;
+            this.loadedQuestion = this.loadedArr[questionNum];
+            
+            //set HTML content
+            $("#questionNum").text( questionNum + 1 );
+            $("#questionText").text( this.loadedQuestion.Question );
+            $("#choiceA").text( this.loadedQuestion.a1 );
+            $("#choiceB").text( this.loadedQuestion.a2 );
+            $("#choiceC").text( this.loadedQuestion.a3 );
+            $("#choiceD").text( this.loadedQuestion.a4 );
+            questionNum++;
         },
 
         onClickLetter: function(btnClicked){ //Function performed on every letter button press

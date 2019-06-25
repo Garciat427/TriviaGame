@@ -46,7 +46,7 @@
                 </div>
             </div>         
             <!-- Game Card -->
-            <div class="card invisible" id="gameCard">
+            <div class="card" id="gameCard">
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
@@ -58,10 +58,16 @@
                                 <div class="col-md-12">
                                     <div class="card h-100">
                                         <div class="card-body text-center">
-                                            <h3 class="text-center">Question</h3> 
-                                            <p>Letters Remaining: <span id="ltrRemNum"></span></p>
-                                            <p>Incorrect Letters: <span id="ltrIncNum"></span></p>
-                                            <p>Chances Left: <span id="ChancesNum"></span></p>
+                                            <h3 class="text-center">Question #<span id="questionNum"></span></h3> <h4 class="text-center"><span id="questionText"></span></h4>
+                                            <p>Choices: 
+                                                A: <span id="choiceA"></span>   
+                                                B: <span id="choiceB"></span>   
+                                                C: <span id="choiceC"></span>   
+                                                D: <span id="choiceD"></span>   
+                                            </p>
+                                            <p> Incorrect Questions:<span id="ChancesNum"><span></p> 
+                                            <p> Correct Questions:<span id="ChancesNum"></span></p>
+                                            
                                         </div>
                                     </div> 
                                 </div>
@@ -71,17 +77,12 @@
                                 <div class="card h-100">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p class="font-weight-bold text-center">Current Word </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
                                             <h1 class="text-center"><span id="wordBox"></span></h1>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p class="font-weight-bold text-center">Letters to choose</p>
+                                            <p class="font-weight-bold text-center">Selection</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -89,12 +90,12 @@
                                             <div id="buttonBox"></div>
                                         </div>
                                     </div>
-                                    <div class="row ">
+                                    <!-- <div class="row ">
                                         <div class="col-md-12 text-center">
                                             <a href="game.html" class="btn btn-dark m-4">Restart Game</a>
                                             
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
