@@ -11,28 +11,33 @@ $(document).ready(function() {
         finishedStatus : false,
         corrAns : 0,
         incorAns : 0,
+        timeRem : 10,
+        timeRunning : false,
+        intervalId : null,
+        flag : false,
+
         //GameArrays
 
-        topic1 : [
+        topic1 : [ //Javascript Trivia
             q1 = {
-                question : "t1Question1", corrAns: "A",
-                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+                question : "Inside which HTML element do we put the JavaScript?", corrAns: "A",
+                a1: "<script>", a2: "<js>", a3: "<scripting>", a4: "<javascript>"
             },
             q2 = {
-                question : "t1Question2", corrAns: "C",
-                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+                question : "Which of the following is the correct syntax to display “HelloWorld!” in an alert box using JavaScript?", corrAns: "C",
+                a1: "alertbox(“HelloWorld!”);", a2: "msg(“HelloWorld!”);", a3: "alert(“HelloWorld!”);", a4: "msgbox(“HelloWorld!”);"
             },
             q3 = {
-                question : "t1Question3", corrAns: "B",
-                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+                question : "What is the correct syntax for referring to an external script called “fun.js”?", corrAns: "B",
+                a1: "<script href=”fun.js”>", a2: "<script src=”fun.js”>", a3: " <script ref=”fun.js”>", a4: "<script name=”fun.js”>"
             },
             q4 = {
-                question : "t1Question4", corrAns: "D",
-                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+                question : "What is the syntax for creating a function in JavaScript named as Adamfunc?", corrAns: "D",
+                a1: "function = Adamfunc()", a2: "function := Adamfunc()", a3: "function : Adamfunc()", a4: "function Adamfunc()"
             },
             q5 = {
-                question : "t1Question5", corrAns: "B",
-                a1: "t1Ans1", a2: "t1Ans2", a3: "t1Ans3", a4: "t1Ans4"
+                question : "What is the JavaScript syntax for printing values in Console?", corrAns: "B",
+                a1: "print(5)", a2: "console.log(5);", a3: "console.print(5);", a4: "print.console(5);"
             }
         ],
 
@@ -110,7 +115,7 @@ $(document).ready(function() {
             this.topic = sel;
             switch (this.topic){
                 case (1): //Canadian Cities
-                $(".topicSelected").text("topic1"); //Displays Current Topic : Canadian Cities
+                $(".topicSelected").text("JavaScript"); //Displays Current Topic : JavaScript
                 this.loadedArr = this.topic1;  //Loads Current Topic array
                 break;   
 
@@ -129,7 +134,6 @@ $(document).ready(function() {
             $("#startGameBtn").addClass("btn-success");
             //Changes Game State
             this.readyState = true;
-            console.log(this.loadedArr);
         },
         
         startGame: function(){ //Function used to start game
@@ -142,6 +146,7 @@ $(document).ready(function() {
         },
 
         selQuestion: function () { //Function used to select random word from topic array
+            this.start();
             this.loadedQuestion = this.loadedArr[this.questionNum];
             
             //set HTML content of the loaded question
@@ -161,6 +166,8 @@ $(document).ready(function() {
         },
 
         onClickLetter: function(btnClicked){ //Function performed on every letter button press
+            this.stop();
+            this.resetTime();
             //Pull Val from pressed button
             letterClicked = $(btnClicked).attr("data-letter")
             //Disable all letter buttons
@@ -171,18 +178,20 @@ $(document).ready(function() {
                 $("#questionText").text("Good Job! You answered correctly!");
                 this.corrAns++;
             }
-            else if (letterClicked !== this.loadedQuestion.corrAns){ //Incorrect Ans
+            else if (letterClicked == undefined){ //Time ran out
+                $("#questionText").text("Sorry! You ran out of time! The correct answer is: " + this.loadedQuestion.corrAns);
+                this.incorAns++;
+            }
+            else{ //Incorrect Ans
                 $(btnClicked).addClass("btn-danger");
                 $("#questionText").text("Sorry! The correct answer is: " + this.loadedQuestion.corrAns);
                 this.incorAns++;
             }
-            else{ //Time ran out
-                $("#questionText").text("Sorry! You ran out of time! The correct answer is: " + this.loadedQuestion.corrAns);
-                this.incorAns++;
-            }
+            
             //Checks for last Q
-            if (!this.finishedStatus) 
-                $("#nextQBtn").removeClass("invisible");
+            if (!this.finishedStatus) {
+                setTimeout(this.resetGameBtns, 5000);
+            }
             else{
                 $("#nextQBtn").addClass("invisible");
                 $("#resultsBtn").animate({ opacity: "1" });
@@ -193,13 +202,44 @@ $(document).ready(function() {
             $(".letter-button").attr("disabled",false);
             $(".letter-button").removeClass("btn-success btn-danger");
             $(".letter-button").addClass("btn-secondary");
-            $("#nextQBtn").addClass("invisible");
+            GameObj.selQuestion();
         },
         results : function(){
             $("#resultsCard").animate({ opacity: "1" });
             $("#incTotal").text(this.incorAns);
             $("#corTotal").text(this.corrAns);
+        },
+
+        start : function(){
+            if (!this.timeRunning) {
+                $("#timeDisp").text(10);
+                this.intervalId = setInterval(this.count, 1000);
+                this.timeRunning = true;
+             }
+        },
+        stop : function(){
+            clearInterval(this.intervalId);
+            this.timeRunning = false;
+        },
+        count : function(){
+            if (GameObj.timeRem !== 0){
+                GameObj.timeRem--
+                $("#timeDisp").text(GameObj.timeRem);
+
+                if (GameObj.timeRem < 5){ //Flash Buttons
+                    $(".letter-button").animate({ opacity: "0.25" });
+                    $(".letter-button").animate({ opacity: "1" });
+                }
+
+            }
+            else {
+                GameObj.onClickLetter(null);
+            }
+        },
+        resetTime : function(){
+            this.timeRem = 10;
         }
+        
     }
     
     GameObj.startLetter(); //Dynamically create Letter buttons
@@ -236,7 +276,6 @@ $(document).ready(function() {
     });
     $("#nextQBtn").on("click", function() {
         GameObj.resetGameBtns();
-        GameObj.selQuestion();
     });
     $("#resultsBtn").on("click", function() {
         $("#gameCard").empty();

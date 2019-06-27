@@ -33,7 +33,7 @@
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" id="topic1DD" >topic1</a>
+                                    <a class="dropdown-item" id="topic1DD" >JavaScript</a>
                                     <a class="dropdown-item" id="topic2DD" >topic2</a>
                                     <a class="dropdown-item" id="topic3DD" >topic3</a>
                                 </div>
@@ -60,13 +60,12 @@
                                         <div class="card-body text-center">
                                             <h3 class="text-center">Question #<span id="questionNum"></span></h3> <h4 class="text-center"><span id="questionText"></span></h4>
                                             <p>Choices: 
-                                                A: <span id="choiceA"></span>   
-                                                B: <span id="choiceB"></span>   
-                                                C: <span id="choiceC"></span>   
-                                                D: <span id="choiceD"></span>   
+                                                | A: <span id="choiceA"></span> | 
+                                                | B: <span id="choiceB"></span> |  
+                                                | C: <span id="choiceC"></span> |  
+                                                | D: <span id="choiceD"></span> |   
                                             </p>
-                                            <p> Incorrect Questions:<span id="ChancesNum"><span></p> 
-                                            <p> Correct Questions:<span id="ChancesNum"></span></p>
+                                            <h3> Time Remaining: <span id="timeDisp"><span></h3> 
                                             
                                         </div>
                                     </div> 
@@ -88,9 +87,6 @@
                                     <div class="row">
                                         <div class="col-md-12 text-center">
                                             <div id="buttonBox"></div>
-                                            <div>
-                                                <button type="button" class="btn btn-success m-3 invisible" id="nextQBtn">Next Question</button>
-                                            </div>
                                             <div>
                                                 <button type="button" class="btn btn-primary m-3" style="opacity : 0" id="resultsBtn">Show Results</button>
                                             </div>
