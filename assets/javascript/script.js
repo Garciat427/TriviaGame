@@ -141,6 +141,7 @@ $(document).ready(function() {
             
             $("#topicSel").empty();
             $("#gameCard").animate({ opacity: "1" });
+            $("#resultsBtn").attr("disabled",true);
             //Select first question
             this.selQuestion();
         },
@@ -195,6 +196,7 @@ $(document).ready(function() {
             else{
                 $("#nextQBtn").addClass("invisible");
                 $("#resultsBtn").animate({ opacity: "1" });
+                $("#resultsBtn").attr("disabled",false);
             }
         },
 
