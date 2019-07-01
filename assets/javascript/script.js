@@ -41,49 +41,49 @@ $(document).ready(function() {
             }
         ],
 
-        topic2 : [
+        topic2 : [ //Canada
             q1 = {
-                question : "t2Question1", corrAns: "B",
-                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+                question : "How many points does a canadian leaf have?", corrAns: "B",
+                a1: "8", a2: "11", a3: "12", a4: "10"
             },
             q2 = {
-                question : "t2Question2", corrAns: "D",
-                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+                question : "Which city is home to North Amercian's Largest Mall?", corrAns: "D",
+                a1: "Mississagua", a2: "Vancouver", a3: "Toronto", a4: "Edmonton"
             },
             q3 = {
-                question : "t2Question3", corrAns: "C",
-                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+                question : "What is Canada's Oldest City?", corrAns: "C",
+                a1: "Toronto", a2: "Charlotte", a3: "St. John's", a4: "Halifax"
             },
             q4 = {
-                question : "t2Question4", corrAns: "A",
-                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+                question : "Which provience is officially declared Bilingual?", corrAns: "A",
+                a1: "New Brunswick", a2: "Nova Scotia", a3: "Quebec", a4: "Ontario"
             },
             q5 = {
-                question : "t2Question5", corrAns: "A",
-                a1: "t2Ans1", a2: "t2Ans2", a3: "t2Ans3", a4: "t2Ans4"
+                question : "How many time zones does Canada have?", corrAns: "A",
+                a1: "6", a2: "5", a3: "4", a4: "3"
             }
         ],
 
-        topic3 : [
+        topic3 : [ // Pokemon
             q1 = {
-                question : "t3Question1", corrAns: "D",
-                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+                question : "What is the most effective pokeball?", corrAns: "D",
+                a1: "Great Ball", a2: "Ultra Ball", a3: "Timer Ball", a4: "Master Ball"
             },
             q2 = {
-                question : "t3Question1", corrAns: "B",
-                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+                question : "What device do trainers use to keep record of pokemon encountered?", corrAns: "B",
+                a1: "Pokecounter", a2: "Pokedex", a3: "PokeFinder", a4: "PokeList"
             },
             q3 = {
-                question : "t3Question1", corrAns: "D",
-                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+                question : "If you need to find supplies, where do you go?", corrAns: "D",
+                a1: "PokeDepot", a2: "PokeMall", a3: "PokeCenter", a4: "PokeMart"
             },
             q4 = {
-                question : "t3Question1", corrAns: "D",
-                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+                question : "If you need to revive your fainted Pokemon to full health, where do you go?", corrAns: "C",
+                a1: "Pokehome", a2: "Pokesave", a3: "Pokecenter", a4: "PokeHospital"
             },
             q5 = {
-                question : "t3Question1", corrAns: "C",
-                a1: "t3Ans1", a2: "t3Ans2", a3: "t3Ans3", a4: "t3Ans4"
+                question : "Which of these Legendary Pokemon is known to appear randomly throughout the Johto region?", corrAns: "C",
+                a1: "Registeel", a2: "Celebi", a3: "Suicune", a4: "Keldeo"
             }
         ],
 
@@ -114,18 +114,18 @@ $(document).ready(function() {
         selTopic: function(sel) { //Function Used to select game topic
             this.topic = sel;
             switch (this.topic){
-                case (1): //Canadian Cities
+                case (1): //JavaScript
                 $(".topicSelected").text("JavaScript"); //Displays Current Topic : JavaScript
                 this.loadedArr = this.topic1;  //Loads Current Topic array
                 break;   
 
-                case (2): //Auto Makers
-                $(".topicSelected").text("topic2"); //Displays Current Topic : Auto Manu
+                case (2): //Canada
+                $(".topicSelected").text("Canada"); //Displays Current Topic : Canada
                 this.loadedArr = this.topic2; //Loads Current Topic array
                 break;
 
-                case (3): //Schools
-                $(".topicSelected").text("topic3"); //Displays Current Topic : Schools
+                case (3): //Pokemon
+                $(".topicSelected").text("Pokemon"); //Displays Current Topic : Pokemon
                 this.loadedArr = this.topic3; //Loads Current Topic array
                 break;
             };
